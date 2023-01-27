@@ -4,21 +4,24 @@ import struct
 import argparse
 import cv2
 
+from ipdb import set_trace
+
 def getprofile(heightMap, res, x1, y1, x2, y2, normalized=False):
     p1 = np.array((x1, y1))
     p2 = np.array((x2, y2))
     dp = p2 - p1
-    len = np.linalg.norm(dp)
+    leng = np.linalg.norm(dp)
+    # print(leng)
     u = np.array((-dp[1], dp[0]))
-    u /= len
+    # set_trace()
+    u /= leng
     samples = []
-    nPoints = int(np.ceil(len)+1)
-    print(nPoints)
+    nPoints = int(np.ceil(leng)+1)
     np_ = nPoints-1
     for i in range(nPoints):
         tv = i/np_
         pt = np.array((x1+tv*dp[0], y1+tv*dp[1]))
-        samples.append([pt, u, tv*len])
+        samples.append([pt, u, tv*leng])
 
     profiles = []
     curr_tv = 0

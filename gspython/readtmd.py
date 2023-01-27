@@ -100,8 +100,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('inputfile', action='store', help='Input a yaml file')
     arguments = parser.parse_args()
-    
+        
+    import matplotlib.pyplot as plt
     hm, hdata = readtmd(arguments.inputfile)
     print(hdata)
-    hm = cv2.normalize(hm, None, 0, 255, cv2.NORM_MINMAX)
-    cv2.imwrite('heightmap.png', hm)    
+    
+    np.save(arguments.inputfile.replace(".tmd", ".npy"), hm*hdata.mmpp)
+    # hm = cv2.normalize(hm, None, 0, 255, cv2.NORM_MINMAX)
+    # plt.imsave("heightmap.png", hm, cmap="gray")
+    # cv2.imwrite('heightmap.png', hm)    

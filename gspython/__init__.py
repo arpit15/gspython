@@ -1,4 +1,4 @@
-from .findscans import *
+# from .findscans import *
 from .getprofile import *
 from .readimg import *
 from .readnrm import *
